@@ -7,7 +7,13 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  # Add package dependencies here.
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+  uuid: ^3.0.7
 
 dev_dependencies:
-  # Add dev dependencies here.
+  build_runner: ^2.4.7
+  freezed: ^2.4.7
+  json_serializable: ^6.7.1
+  flutter_lints: ^3.0.1
+
