@@ -1,0 +1,20 @@
+# Configuration for build_runner to enable code generation across the monorepo.
+targets:
+  $default:
+    builders:
+      riverpod_generator|riverpod_generator:
+        generate_for:
+          - lib/**
+          - packages/**/lib/**
+      freezed|freezed:
+        generate_for:
+          - lib/**
+          - packages/**/lib/**
+      json_serializable|json_serializable:
+        generate_for:
+          - lib/**
+          - packages/**/lib/**
+      drift_dev|drift_dev:
+        generate_for:
+          - lib/**
+          - packages/**/lib/**
