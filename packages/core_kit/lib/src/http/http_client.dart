@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HttpClient {
   HttpClient({
@@ -10,17 +11,24 @@ class HttpClient {
     int maxAttempts = 3,
     Duration retryBaseDelay = const Duration(milliseconds: 300),
     bool? enableLogging,
+    Map<String, String>? apiKeys,
   })  : _dio = dio ?? Dio(),
         _maxAttempts = maxAttempts,
         _retryBaseDelay = retryBaseDelay,
-        _enableLogging = enableLogging ?? kDebugMode;
+        _enableLogging = enableLogging ?? kDebugMode,
+        _apiKeys = {
+          ..._readEnvApiKeys(),
+          if (apiKeys != null) ...apiKeys,
+        };
 
   final Dio _dio;
   final int _maxAttempts;
   final Duration _retryBaseDelay;
   final bool _enableLogging;
+  final Map<String, String> _apiKeys;
 
   Dio get dio => _dio;
+  Map<String, String> get apiKeys => Map.unmodifiable(_apiKeys);
 
   Future<Response<T>> get<T>(
     String path, {
@@ -134,4 +142,27 @@ class HttpClient {
     }
     log(message, name: 'HttpClient');
   }
+
+  String? apiKey(String name) => _apiKeys[name];
+
+  static Map<String, String> _readEnvApiKeys() {
+    if (!dotenv.isInitialized) {
+      return const {};
+    }
+
+    final map = <String, String>{};
+    for (final key in _supportedEnvApiKeys) {
+      final value = dotenv.env[key];
+      if (value != null && value.isNotEmpty) {
+        map[key] = value;
+      }
+    }
+    return map;
+  }
+
+  static const _supportedEnvApiKeys = <String>{
+    'OFF_API_KEY',
+    'FDC_API_KEY',
+    'EDAMAM_API_KEY',
+  };
 }

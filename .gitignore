@@ -25,3 +25,7 @@ coverage/
 
 # Generated files
 **/generated/
+
+# Environment files
+.env
+app/.env
