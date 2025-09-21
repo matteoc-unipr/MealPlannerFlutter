@@ -1,0 +1,27 @@
+# Dart & Flutter
+.dart_tool/
+.packages
+.buildlog/
+build/
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# Generated files
+**/generated/

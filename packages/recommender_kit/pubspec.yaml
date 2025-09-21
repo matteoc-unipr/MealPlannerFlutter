@@ -1,0 +1,13 @@
+name: recommender_kit
+description: Recommendation engine tools for Assistente Alimentare.
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  # Add package dependencies here.
+
+dev_dependencies:
+  # Add dev dependencies here.

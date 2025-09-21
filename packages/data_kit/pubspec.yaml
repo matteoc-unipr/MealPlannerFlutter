@@ -1,0 +1,16 @@
+name: data_kit
+description: Data access layer for the Assistente Alimentare project.
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  core_kit:
+    path: ../core_kit
+  drift: 2.15.0
+
+dev_dependencies:
+  path: 1.9.0
+  test: 1.25.2
