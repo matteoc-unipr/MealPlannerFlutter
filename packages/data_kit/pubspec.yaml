@@ -7,7 +7,11 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  # Add package dependencies here.
+  core_kit:
+    path: ../core_kit
+  drift: 2.15.0
 
 dev_dependencies:
-  # Add dev dependencies here.
+  path: 1.9.0
+  test: 1.25.2
+
