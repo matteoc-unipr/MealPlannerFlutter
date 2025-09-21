@@ -90,6 +90,8 @@ class UserProfiles extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();
   TextColumn get preferredDiet => text()();
+  TextColumn get shoppingDay =>
+      text().withDefault(const Constant('monday'))();
   IntColumn get dailyCalorieTarget => integer()();
   RealColumn get heightCm => real()();
   RealColumn get weightKg => real()();

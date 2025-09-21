@@ -16,6 +16,7 @@ void main() {
       final profile = UserProfile.create(
         name: 'Test',
         preferredDiet: DietModel.vegetarian,
+        shoppingDay: Weekday.saturday,
         dailyCalorieTarget: 2000,
         heightCm: 170,
         weightKg: 68,
@@ -158,6 +159,7 @@ void main() {
       final profile = UserProfile.create(
         name: 'Mario',
         preferredDiet: DietModel.omnivore,
+        shoppingDay: Weekday.friday,
         dailyCalorieTarget: 2200,
         heightCm: 175,
         weightKg: 75,

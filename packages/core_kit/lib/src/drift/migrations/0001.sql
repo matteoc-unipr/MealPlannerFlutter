@@ -72,6 +72,7 @@ CREATE TABLE user_profiles (
   id TEXT NOT NULL PRIMARY KEY,
   name TEXT NOT NULL,
   preferred_diet TEXT NOT NULL,
+  shopping_day TEXT NOT NULL DEFAULT 'monday',
   daily_calorie_target INTEGER NOT NULL,
   height_cm REAL NOT NULL,
   weight_kg REAL NOT NULL,

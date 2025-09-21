@@ -53,6 +53,7 @@ void main() {
     final profile = UserProfile.create(
       name: 'Test User',
       preferredDiet: DietModel.omnivore,
+      shoppingDay: Weekday.saturday,
       dailyCalorieTarget: 2200,
       heightCm: 180,
       weightKg: 75,
@@ -72,6 +73,7 @@ void main() {
       id: profile.id,
       name: 'Updated User',
       preferredDiet: profile.preferredDiet,
+      shoppingDay: profile.shoppingDay,
       dailyCalorieTarget: profile.dailyCalorieTarget,
       heightCm: profile.heightCm,
       weightKg: profile.weightKg,

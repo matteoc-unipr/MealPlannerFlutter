@@ -5,9 +5,26 @@ publish_to: 'none'
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.13.0"
 
 dependencies:
-  # Add package dependencies here.
+  flutter:
+    sdk: flutter
+  core_kit:
+    path: ../../core_kit
+  data_kit:
+    path: ../../data_kit
+  nutrition_kit:
+    path: ../../nutrition_kit
+  recommender_kit:
+    path: ../../recommender_kit
+  shopping_feature:
+    path: ../shopping
+  flutter_local_notifications: ^16.3.2
+  timezone: ^0.9.2
+  workmanager: ^0.5.1
 
 dev_dependencies:
-  # Add dev dependencies here.
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
