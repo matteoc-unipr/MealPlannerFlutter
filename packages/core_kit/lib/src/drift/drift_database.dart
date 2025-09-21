@@ -42,7 +42,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase(QueryExecutor executor) : super(executor);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -52,6 +52,9 @@ class AppDatabase extends _$AppDatabase {
         onUpgrade: (Migrator m, int from, int to) async {
           if (from < 1) {
             await m.createAll();
+          }
+          if (from < 2) {
+            await m.addColumn(userProfiles, userProfiles.shoppingDay);
           }
         },
       );
@@ -359,6 +362,7 @@ class AppDatabase extends _$AppDatabase {
         'id': profile.id,
         'name': profile.name,
         'preferred_diet': profile.preferredDiet.name,
+        'shopping_day': profile.shoppingDay.name,
         'daily_calorie_target': profile.dailyCalorieTarget,
         'height_cm': profile.heightCm,
         'weight_kg': profile.weightKg,
@@ -376,6 +380,7 @@ class AppDatabase extends _$AppDatabase {
         name: data['name'] as String,
         preferredDiet:
             DietModel.values.byName(data['preferred_diet'] as String),
+        shoppingDay: Weekday.values.byName(data['shopping_day'] as String),
         dailyCalorieTarget: _intValue(data['daily_calorie_target']),
         heightCm: _doubleValue(data['height_cm']),
         weightKg: _doubleValue(data['weight_kg']),
