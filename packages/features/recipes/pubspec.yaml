@@ -5,9 +5,20 @@ publish_to: 'none'
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.13.0"
 
 dependencies:
-  # Add package dependencies here.
+  flutter:
+    sdk: flutter
+  core_kit:
+    path: ../../core_kit
+  nutrition_kit:
+    path: ../../nutrition_kit
+  meals_feature:
+    path: ../meals
+  path: ^1.9.0
 
 dev_dependencies:
-  # Add dev dependencies here.
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
