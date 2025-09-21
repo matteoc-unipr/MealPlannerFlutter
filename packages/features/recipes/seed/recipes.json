@@ -1,0 +1,151 @@
+{
+  "recipes": [
+    {
+      "id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "title": "Quinoa Power Bowl",
+      "description": "A hearty bowl with quinoa, chicken, and avocado.",
+      "nutrients": {
+        "calories": 520.0,
+        "protein": 36.0,
+        "fat": 18.0,
+        "carbohydrates": 52.0,
+        "fiber": 12.0,
+        "sugar": 6.0,
+        "sodium": 320.0
+      },
+      "servingSize": 1.0,
+      "servingUnit": "serving",
+      "ingredients": [
+        {
+          "id": "a1a1a1a1-a1a1-4a1a-a1a1-a1a1a1a1a1a1",
+          "itemId": "11111111-1111-1111-1111-111111111111",
+          "quantity": 1.0,
+          "unit": "cup",
+          "preparation": "cooked"
+        },
+        {
+          "id": "b2b2b2b2-b2b2-4b2b-b2b2-b2b2b2b2b2b2",
+          "itemId": "22222222-2222-2222-2222-222222222222",
+          "quantity": 150.0,
+          "unit": "gram",
+          "preparation": "sliced"
+        },
+        {
+          "id": "c3c3c3c3-c3c3-4c3c-c3c3-c3c3c3c3c3c3",
+          "itemId": "33333333-3333-3333-3333-333333333333",
+          "quantity": 0.5,
+          "unit": "piece",
+          "preparation": "sliced"
+        }
+      ],
+      "instructions": [
+        "Cook quinoa according to package instructions.",
+        "Slice grilled chicken and avocado.",
+        "Combine ingredients in a bowl and season to taste."
+      ],
+      "tags": ["high-protein", "gluten-free"],
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 20,
+      "imageUrl": "https://example.com/images/quinoa-bowl.jpg",
+      "sourceUrl": "https://example.com/recipes/quinoa-power-bowl"
+    },
+    {
+      "id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "title": "Berry Yogurt Parfait",
+      "description": "Layered Greek yogurt with blueberries and granola.",
+      "nutrients": {
+        "calories": 280.0,
+        "protein": 20.0,
+        "fat": 5.0,
+        "carbohydrates": 38.0,
+        "fiber": 4.0,
+        "sugar": 22.0,
+        "sodium": 120.0
+      },
+      "servingSize": 1.0,
+      "servingUnit": "serving",
+      "ingredients": [
+        {
+          "id": "d4d4d4d4-d4d4-4d4d-d4d4-d4d4d4d4d4d4",
+          "itemId": "44444444-4444-4444-4444-444444444444",
+          "quantity": 1.0,
+          "unit": "cup",
+          "preparation": null
+        },
+        {
+          "id": "e5e5e5e5-e5e5-4e5e-e5e5-e5e5e5e5e5e5",
+          "itemId": "55555555-5555-5555-5555-555555555555",
+          "quantity": 0.5,
+          "unit": "cup",
+          "preparation": null
+        },
+        {
+          "id": "f6f6f6f6-f6f6-4f6f-f6f6-f6f6f6f6f6f6",
+          "itemId": "66666666-6666-6666-6666-666666666666",
+          "quantity": 0.25,
+          "unit": "cup",
+          "preparation": null
+        }
+      ],
+      "instructions": [
+        "Spoon half of the yogurt into a glass.",
+        "Add a layer of blueberries and granola.",
+        "Repeat the layers and serve immediately."
+      ],
+      "tags": ["breakfast", "vegetarian"],
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "imageUrl": "https://example.com/images/berry-parfait.jpg",
+      "sourceUrl": "https://example.com/recipes/berry-yogurt-parfait"
+    },
+    {
+      "id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+      "title": "Avocado Toast Deluxe",
+      "description": "Toasted whole grain bread topped with smashed avocado and yogurt drizzle.",
+      "nutrients": {
+        "calories": 430.0,
+        "protein": 16.0,
+        "fat": 24.0,
+        "carbohydrates": 40.0,
+        "fiber": 11.0,
+        "sugar": 6.0,
+        "sodium": 520.0
+      },
+      "servingSize": 1.0,
+      "servingUnit": "serving",
+      "ingredients": [
+        {
+          "id": "g7g7g7g7-g7g7-4g7g-g7g7-g7g7g7g7g7g7",
+          "itemId": "77777777-7777-7777-7777-777777777777",
+          "quantity": 2.0,
+          "unit": "piece",
+          "preparation": "toasted"
+        },
+        {
+          "id": "h8h8h8h8-h8h8-4h8h-h8h8-h8h8h8h8h8h8",
+          "itemId": "33333333-3333-3333-3333-333333333333",
+          "quantity": 1.0,
+          "unit": "piece",
+          "preparation": "smashed"
+        },
+        {
+          "id": "i9i9i9i9-i9i9-4i9i-i9i9-i9i9i9i9i9i9",
+          "itemId": "44444444-4444-4444-4444-444444444444",
+          "quantity": 2.0,
+          "unit": "tablespoon",
+          "preparation": "mixed with lemon"
+        }
+      ],
+      "instructions": [
+        "Toast the bread slices until golden brown.",
+        "Mash the avocado with salt, pepper, and lemon juice.",
+        "Spread the avocado on the toast and drizzle with yogurt mixture."
+      ],
+      "tags": ["vegetarian", "brunch"],
+      "prepTimeMinutes": 12,
+      "cookTimeMinutes": 5,
+      "imageUrl": "https://example.com/images/avocado-toast.jpg",
+      "sourceUrl": "https://example.com/recipes/avocado-toast-deluxe"
+    }
+  ]
+}
