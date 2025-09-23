@@ -1,0 +1,4 @@
+# Ignore locally generated binary placeholders
+placeholder.png
+icons/app_icon.png
+icons/app_icon_dark.png
