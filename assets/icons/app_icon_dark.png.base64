@@ -1,0 +1,4 @@
+# Base64-encoded 1x1 PNG dark app icon placeholder (blue-black pixel)
+# Generate with:
+#   base64 --decode assets/icons/app_icon_dark.png.base64 > assets/icons/app_icon_dark.png
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGPgUtAHAACRAFptu+FlAAAAAElFTkSuQmCC

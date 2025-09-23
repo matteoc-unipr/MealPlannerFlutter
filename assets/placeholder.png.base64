@@ -1,0 +1,4 @@
+# Base64-encoded 1x1 PNG placeholder (white pixel)
+# Generate the binary file with:
+#   base64 --decode assets/placeholder.png.base64 > assets/placeholder.png
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=
