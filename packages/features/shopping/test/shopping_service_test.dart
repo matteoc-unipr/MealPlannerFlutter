@@ -80,7 +80,11 @@ void main() {
       );
 
       expect(summary.plan.items, hasLength(2));
-      expect(summary.plan.items.firstWhere((item) => item.name == 'Apple').quantity, 2);
+      expect(
+          summary.plan.items
+              .firstWhere((item) => item.name == 'Apple')
+              .quantity,
+          2);
       expect(summary.nextShoppingDate.weekday, DateTime.thursday);
     });
   });

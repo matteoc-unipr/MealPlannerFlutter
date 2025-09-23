@@ -19,18 +19,43 @@ jobs:
           channel: stable
 
       - name: Flutter pub get
-        working-directory: app
         run: flutter pub get
 
-      - name: Build runner
-        working-directory: app
-        run: |
-          dart run build_runner build -d || echo "build_runner non configurato o nessuna build necessaria."
+      - name: Run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs || echo "build_runner non configurato o nessuna build necessaria."
 
       - name: Flutter analyze
-        working-directory: app
         run: flutter analyze
 
-      - name: Flutter test
+      - name: Run root Flutter tests
+        run: |
+          flutter test
+          flutter test test_driver/integration_test.dart
+
+      - name: Run app tests
         working-directory: app
-        run: flutter test
+        run: |
+          flutter pub get
+          flutter test
+
+      - name: Run package test suites
+        run: |
+          set -e
+          for dir in packages/*; do
+            if [ -f "$dir/pubspec.yaml" ]; then
+              echo "Running tests in $dir"
+              if grep -q "sdk: flutter" "$dir/pubspec.yaml"; then
+                (cd "$dir" && flutter pub get)
+                test_files=$(find "$dir/test" -name '*_test.dart' -print -quit)
+                if [ -n "$test_files" ]; then
+                  (cd "$dir" && flutter test)
+                fi
+              else
+                (cd "$dir" && dart pub get)
+                test_files=$(find "$dir/test" -name '*_test.dart' -print -quit)
+                if [ -n "$test_files" ]; then
+                  (cd "$dir" && dart test)
+                fi
+              fi
+            fi
+          done

@@ -93,7 +93,8 @@ void main() {
     await tester.tap(find.byKey(const Key('fake-scanner')));
     await tester.pumpAndSettle();
 
-    final l10n = AppLocalizations.of(tester.element(find.byType(ScannerScreen)))!;
+    final l10n =
+        AppLocalizations.of(tester.element(find.byType(ScannerScreen)))!;
     expect(find.byType(ConfirmFoodScreen), findsOneWidget);
     expect(find.text('Pane integrale'), findsOneWidget);
 
