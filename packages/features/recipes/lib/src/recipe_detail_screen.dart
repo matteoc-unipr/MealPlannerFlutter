@@ -1,5 +1,6 @@
 import 'package:core_kit/core_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:meals_feature/meals_feature.dart';
 import 'package:nutrition_kit/nutrition_kit.dart';
 
@@ -62,6 +63,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final description = widget.recipe.description;
 
     return Scaffold(
@@ -86,8 +88,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 _recalculate();
               });
             },
-            label: 'Porzioni',
-            unitLabel: 'porz.',
+            label: l10n.recipeServingsLabel,
+            unitLabel: l10n.unitServingShort,
             step: 0.5,
             min: 0.5,
             precision: 1,
@@ -95,14 +97,17 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           const SizedBox(height: 24),
           _NutrientSummary(nutrients: _nutrients),
           const SizedBox(height: 24),
-          Text(
-            'Ingredienti',
-            style: theme.textTheme.titleLarge,
+          Semantics(
+            header: true,
+            child: Text(
+              l10n.recipeIngredientsTitle,
+              style: theme.textTheme.titleLarge,
+            ),
           ),
           const SizedBox(height: 12),
           if (_scaledIngredients.isEmpty)
             Text(
-              'Nessun ingrediente disponibile per questa ricetta.',
+              l10n.recipeNoIngredientsMessage,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
@@ -111,9 +116,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             ..._scaledIngredients.map(_IngredientTile.new),
           if (widget.recipe.instructions.isNotEmpty) ...[
             const SizedBox(height: 32),
-            Text(
-              'Istruzioni',
-              style: theme.textTheme.titleLarge,
+            Semantics(
+              header: true,
+              child: Text(
+                l10n.recipeInstructionsTitle,
+                style: theme.textTheme.titleLarge,
+              ),
             ),
             const SizedBox(height: 12),
             ...List<Widget>.generate(
@@ -137,7 +145,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ],
           const SizedBox(height: 32),
           PrimaryButton(
-            label: 'Aggiungi al pasto',
+            label: l10n.commonAddToMeal,
             icon: const Icon(Icons.restaurant),
             expanded: true,
             onPressed: _scaledIngredients.isEmpty ? null : _addToMeal,
@@ -181,8 +189,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Ricetta aggiunta al diario.'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.recipeAddedToDiary),
       ),
     );
   }
@@ -196,7 +204,8 @@ class _IngredientTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final unit = _formatUnit(ingredient.unit);
+    final l10n = AppLocalizations.of(context)!;
+    final unit = _formatUnit(ingredient.unit, l10n);
     final quantity = _formatQuantity(ingredient.quantity);
     final details = <String>[
       unit == null ? quantity : '$quantity $unit',
@@ -224,26 +233,26 @@ class _IngredientTile extends StatelessWidget {
     );
   }
 
-  String? _formatUnit(UnitType unit) {
+  String? _formatUnit(UnitType unit, AppLocalizations l10n) {
     switch (unit) {
       case UnitType.gram:
-        return 'g';
+        return l10n.unitGram;
       case UnitType.milliliter:
-        return 'ml';
+        return l10n.unitMilliliter;
       case UnitType.ounce:
-        return 'oz';
+        return l10n.unitOunce;
       case UnitType.pound:
-        return 'lb';
+        return l10n.unitPound;
       case UnitType.piece:
-        return 'pz';
+        return l10n.unitPiece;
       case UnitType.cup:
-        return 'cup';
+        return l10n.unitCup;
       case UnitType.tablespoon:
-        return 'cucchiaio';
+        return l10n.unitTablespoon;
       case UnitType.teaspoon:
-        return 'cucchiaino';
+        return l10n.unitTeaspoon;
       case UnitType.serving:
-        return 'porz.';
+        return l10n.unitServingShort;
     }
   }
 
@@ -263,27 +272,28 @@ class _NutrientSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final items = <_NutrientData>[
       _NutrientData(
-        label: 'Calorie',
+        label: l10n.macroCaloriesLabel,
         value: nutrients.calories,
         unit: 'kcal',
         valueKey: const Key('nutrient_calories_value'),
       ),
       _NutrientData(
-        label: 'Proteine',
+        label: l10n.macroProteinLabel,
         value: nutrients.protein,
         unit: 'g',
         valueKey: const Key('nutrient_protein_value'),
       ),
       _NutrientData(
-        label: 'Carboidrati',
+        label: l10n.macroCarbsLabel,
         value: nutrients.carbohydrates,
         unit: 'g',
         valueKey: const Key('nutrient_carbs_value'),
       ),
       _NutrientData(
-        label: 'Grassi',
+        label: l10n.macroFatLabel,
         value: nutrients.fat,
         unit: 'g',
         valueKey: const Key('nutrient_fat_value'),
@@ -299,7 +309,7 @@ class _NutrientSummary extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Valori nutrizionali',
+              l10n.nutritionValuesTitle,
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -319,21 +329,25 @@ class _NutrientRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            item.label,
-            style: theme.textTheme.bodyLarge,
-          ),
-          Text(
-            '${item.formattedValue} ${item.unit}',
-            key: item.valueKey,
-            style: theme.textTheme.titleMedium,
-          ),
-        ],
+    return Semantics(
+      label: item.label,
+      value: '${item.formattedValue} ${item.unit}',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              item.label,
+              style: theme.textTheme.bodyLarge,
+            ),
+            Text(
+              '${item.formattedValue} ${item.unit}',
+              key: item.valueKey,
+              style: theme.textTheme.titleMedium,
+            ),
+          ],
+        ),
       ),
     );
   }

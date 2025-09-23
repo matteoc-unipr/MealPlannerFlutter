@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// A numeric stepper that allows changing a quantity with undo support.
 class QuantityStepper extends StatefulWidget {
@@ -15,7 +16,7 @@ class QuantityStepper extends StatefulWidget {
     this.unitLabel,
     this.precision = 1,
     this.snackBarDuration = const Duration(seconds: 3),
-    this.undoLabel = 'Annulla',
+    this.undoLabel,
   }) : assert(precision >= 0, 'Precision must be zero or positive.');
 
   /// Current value rendered by the stepper.
@@ -46,7 +47,7 @@ class QuantityStepper extends StatefulWidget {
   final Duration snackBarDuration;
 
   /// Label used for the snackbar undo action.
-  final String undoLabel;
+  final String? undoLabel;
 
   @override
   State<QuantityStepper> createState() => _QuantityStepperState();
@@ -108,12 +109,17 @@ class _QuantityStepperState extends State<QuantityStepper> {
     final unitSuffix = widget.unitLabel != null
         ? ' ${widget.unitLabel!.toLowerCase()}'
         : '';
+    final l10n = AppLocalizations.of(context);
+    final messageValue = '$formatted$unitSuffix';
     messenger.showSnackBar(
       SnackBar(
         duration: widget.snackBarDuration,
-        content: Text('Quantità aggiornata a $formatted$unitSuffix'),
+        content: Text(
+          l10n?.quantityUpdatedMessage(messageValue) ??
+              'Quantity updated to $messageValue',
+        ),
         action: SnackBarAction(
-          label: widget.undoLabel,
+          label: widget.undoLabel ?? l10n?.commonUndo ?? 'Undo',
           onPressed: () {
             widget.onChanged(previous);
           },
@@ -143,9 +149,12 @@ class _QuantityStepperState extends State<QuantityStepper> {
         if (widget.label != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              widget.label!,
-              style: theme.textTheme.titleMedium,
+            child: Semantics(
+              header: true,
+              child: Text(
+                widget.label!,
+                style: theme.textTheme.titleMedium,
+              ),
             ),
           ),
         DecoratedBox(
@@ -162,10 +171,15 @@ class _QuantityStepperState extends State<QuantityStepper> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  unit == null ? formatted : '$formatted $unit',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+                child: Semantics(
+                  label: widget.label,
+                  value: unit == null ? formatted : '$formatted $unit',
+                  readOnly: true,
+                  child: Text(
+                    unit == null ? formatted : '$formatted $unit',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:core_kit/core_kit.dart';
 import 'package:data_kit/data_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nutrition_kit/nutrition_kit.dart';
 
 /// Confirmation screen displayed after a barcode lookup resolves to a [FoodItem].
@@ -62,7 +63,7 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
         _nutrients = widget.foodItem.nutrients;
         _loadingNutrients = false;
         _errorMessage =
-            'Impossibile aggiornare i valori nutrizionali. Verranno usati quelli disponibili.';
+            AppLocalizations.of(context)!.confirmFoodNutritionUpdateError;
       });
     }
   }
@@ -94,7 +95,7 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
       }
       setState(() {
         _errorMessage =
-            'Non è stato possibile aggiungere l\'alimento al pasto. Riprova più tardi.';
+            AppLocalizations.of(context)!.confirmFoodAddError;
       });
     } finally {
       if (mounted) {
@@ -140,8 +141,10 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
     );
   }
 
-  String get _portionDescription =>
-      '${_formatQuantity(_quantity)} ${_unitLabel(_unit).toLowerCase()}';
+  String get _portionDescription {
+    final l10n = AppLocalizations.of(context)!;
+    return '${_formatQuantity(_quantity)} ${_unitLabel(_unit, l10n).toLowerCase()}';
+  }
 
   String _formatQuantity(double value) {
     if (value % 1 == 0) {
@@ -150,12 +153,31 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
     return value.toStringAsFixed(1).replaceAll('.', ',');
   }
 
-  String _unitLabel(UnitType unit) {
-    final name = unit.name.replaceAll('_', ' ');
-    return name[0].toUpperCase() + name.substring(1);
+  String _unitLabel(UnitType unit, AppLocalizations l10n) {
+    switch (unit) {
+      case UnitType.gram:
+        return l10n.unitGram;
+      case UnitType.milliliter:
+        return l10n.unitMilliliter;
+      case UnitType.ounce:
+        return l10n.unitOunce;
+      case UnitType.pound:
+        return l10n.unitPound;
+      case UnitType.piece:
+        return l10n.unitPiece;
+      case UnitType.cup:
+        return l10n.unitCup;
+      case UnitType.tablespoon:
+        return l10n.unitTablespoon;
+      case UnitType.teaspoon:
+        return l10n.unitTeaspoon;
+      case UnitType.serving:
+        return l10n.unitServing;
+    }
   }
 
   Widget _buildQuantityControls(ThemeData theme) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         DecoratedBox(
@@ -187,9 +209,9 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
         Expanded(
           child: DropdownButtonFormField<UnitType>(
             value: _unit,
-            decoration: const InputDecoration(
-              labelText: 'Unità',
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+              labelText: l10n.confirmFoodUnitLabel,
+              border: const OutlineInputBorder(),
             ),
             onChanged: (value) {
               if (value != null) {
@@ -202,7 +224,7 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
                 .map(
                   (unit) => DropdownMenuItem<UnitType>(
                     value: unit,
-                    child: Text(_unitLabel(unit)),
+                    child: Text(_unitLabel(unit, l10n)),
                   ),
                 )
                 .toList(),
@@ -221,38 +243,43 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
     }
 
     final nutrients = _scaledNutrients;
+    final l10n = AppLocalizations.of(context)!;
     final values = <_NutrientValue>[
-      _NutrientValue('Calorie', nutrients.calories, 'kcal'),
-      _NutrientValue('Proteine', nutrients.protein, 'g'),
-      _NutrientValue('Grassi', nutrients.fat, 'g'),
-      _NutrientValue('Carboidrati', nutrients.carbohydrates, 'g'),
-      _NutrientValue('Fibre', nutrients.fiber, 'g'),
-      _NutrientValue('Zuccheri', nutrients.sugar, 'g'),
-      _NutrientValue('Sodio', nutrients.sodium, 'mg'),
+      _NutrientValue(l10n.confirmFoodNutrientsCalories, nutrients.calories, 'kcal'),
+      _NutrientValue(l10n.confirmFoodNutrientsProtein, nutrients.protein, 'g'),
+      _NutrientValue(l10n.confirmFoodNutrientsFat, nutrients.fat, 'g'),
+      _NutrientValue(l10n.confirmFoodNutrientsCarbs, nutrients.carbohydrates, 'g'),
+      _NutrientValue(l10n.confirmFoodNutrientsFiber, nutrients.fiber, 'g'),
+      _NutrientValue(l10n.confirmFoodNutrientsSugar, nutrients.sugar, 'g'),
+      _NutrientValue(l10n.confirmFoodNutrientsSodium, nutrients.sodium, 'mg'),
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Valori nutrizionali (${_portionDescription})',
+          l10n.confirmFoodNutritionTitle(_portionDescription),
           style: theme.textTheme.titleMedium,
         ),
         const SizedBox(height: 12),
         ...values.map(
           (value) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(value.label, style: theme.textTheme.bodyLarge),
-                Text(
-                  value.formatted,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
+            child: Semantics(
+              label: value.label,
+              value: value.formatted,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(value.label, style: theme.textTheme.bodyLarge),
+                  Text(
+                    value.formatted,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -263,17 +290,21 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Conferma alimento'),
+        title: Text(l10n.confirmFoodTitle),
       ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            Text(
-              widget.foodItem.name,
-              style: theme.textTheme.headlineSmall,
+            Semantics(
+              header: true,
+              child: Text(
+                widget.foodItem.name,
+                style: theme.textTheme.headlineSmall,
+              ),
             ),
             if (widget.foodItem.brand != null && widget.foodItem.brand!.isNotEmpty)
               Padding(
@@ -324,7 +355,7 @@ class _ConfirmFoodScreenState extends State<ConfirmFoodScreen> {
                       width: 24,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                  : const Text('Aggiungi al pasto'),
+                  : Text(l10n.commonAddToMeal),
             ),
           ),
         ),

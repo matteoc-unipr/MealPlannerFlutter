@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:nutrition_kit/nutrition_kit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scanner_feature/confirm_food_screen.dart';
 import 'package:scanner_feature/scanner_screen.dart';
 
@@ -58,6 +59,8 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: ScannerScreen(
           nutritionProvider: nutritionProvider,
           mealRepository: mealRepository,
@@ -90,10 +93,11 @@ void main() {
     await tester.tap(find.byKey(const Key('fake-scanner')));
     await tester.pumpAndSettle();
 
+    final l10n = AppLocalizations.of(tester.element(find.byType(ScannerScreen)))!;
     expect(find.byType(ConfirmFoodScreen), findsOneWidget);
     expect(find.text('Pane integrale'), findsOneWidget);
 
-    await tester.tap(find.text('Aggiungi al pasto'));
+    await tester.tap(find.text(l10n.commonAddToMeal));
     await tester.pumpAndSettle();
 
     expect(mealRepository.addedMealType, MealType.lunch);
