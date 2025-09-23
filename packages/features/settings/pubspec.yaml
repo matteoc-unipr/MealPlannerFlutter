@@ -5,9 +5,17 @@ publish_to: 'none'
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.13.0"
 
 dependencies:
-  # Add package dependencies here.
+  flutter:
+    sdk: flutter
+  core_kit:
+    path: ../../core_kit
+  data_kit:
+    path: ../../data_kit
 
 dev_dependencies:
-  # Add dev dependencies here.
+  flutter_test:
+    sdk: flutter
+  drift: 2.15.0
