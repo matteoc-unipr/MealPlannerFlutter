@@ -1,0 +1,159 @@
+{
+  "@@locale": "it",
+  "appTitle": "Assistente Alimentare",
+  "counterScreenTitle": "Assistente Alimentare",
+  "counterInstructions": "Hai premuto il pulsante questo numero di volte:",
+  "counterTooltip": "Incrementa",
+  "counterValueSemantic": "Conteggio attuale: {value}",
+  "@counterValueSemantic": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Impostazioni",
+  "settingsCalorieTargetSectionTitle": "Target calorico",
+  "settingsDailyCaloriesLabel": "Calorie giornaliere (kcal)",
+  "settingsMacroGoalsSectionTitle": "Obiettivi macro",
+  "settingsMacroGoalsDescription": "Imposta gli obiettivi giornalieri per i principali macronutrienti.",
+  "settingsProteinLabel": "Proteine (g)",
+  "settingsCarbsLabel": "Carboidrati (g)",
+  "settingsFatLabel": "Grassi (g)",
+  "settingsAllergiesSectionTitle": "Allergie",
+  "settingsAllergiesHint": "Inserisci le allergie separate da virgola",
+  "settingsShoppingDayLabel": "Giorno della spesa",
+  "settingsHealthSyncTitle": "Sincronizza con Health",
+  "settingsHealthSyncSubtitle": "Abilita l'integrazione con i servizi di salute del dispositivo.",
+  "settingsExportButton": "Export",
+  "settingsDeleteButton": "Elimina dati",
+  "settingsExportSuccess": "Esportazione completata.",
+  "settingsExportError": "Errore durante l'esportazione: {error}",
+  "@settingsExportError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDeleteDialogTitle": "Elimina dati",
+  "settingsDeleteDialogMessage": "Sei sicuro di voler eliminare tutti i dati salvati? Questa azione non può essere annullata.",
+  "commonCancel": "Annulla",
+  "commonConfirm": "Conferma",
+  "settingsDeleteSuccess": "Tutti i dati sono stati eliminati.",
+  "settingsDeleteError": "Errore durante l'eliminazione: {error}",
+  "@settingsDeleteError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "weekdayMonday": "Lunedì",
+  "weekdayTuesday": "Martedì",
+  "weekdayWednesday": "Mercoledì",
+  "weekdayThursday": "Giovedì",
+  "weekdayFriday": "Venerdì",
+  "weekdaySaturday": "Sabato",
+  "weekdaySunday": "Domenica",
+  "dailyDiaryTitle": "Diario • {date}",
+  "@dailyDiaryTitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dailyDiaryMacroSummaryTitle": "Riepilogo macro",
+  "dailyDiaryMealsSectionTitle": "Pasti registrati",
+  "dailyDiaryNoMealsMessage": "Nessun pasto registrato per questo giorno.",
+  "macroCaloriesLabel": "Calorie",
+  "macroProteinLabel": "Proteine",
+  "macroCarbsLabel": "Carboidrati",
+  "macroFatLabel": "Grassi",
+  "dailyDiaryMacroGoal": "Obiettivo {goal}",
+  "@dailyDiaryMacroGoal": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "mealTileNoIngredients": "Nessun alimento registrato",
+  "mealTypeBreakfast": "Colazione",
+  "mealTypeLunch": "Pranzo",
+  "mealTypeDinner": "Cena",
+  "mealTypeSnack": "Spuntino",
+  "mealTypeWithTime": "{mealType} • {time}",
+  "@mealTypeWithTime": {
+    "placeholders": {
+      "mealType": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "addMealScanLabel": "Scansiona",
+  "addMealScanDescription": "Inquadra il codice a barre di un prodotto.",
+  "addMealSearchLabel": "Cerca",
+  "addMealSearchDescription": "Trova un alimento nel catalogo.",
+  "addMealRecipesLabel": "Ricette",
+  "addMealRecipesDescription": "Aggiungi una delle tue ricette salvate.",
+  "addMealQuickLabel": "Rapidi",
+  "addMealQuickDescription": "Registra velocemente calorie o note.",
+  "quantityUpdatedMessage": "Quantità aggiornata a {value}",
+  "@quantityUpdatedMessage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "commonUndo": "Annulla",
+  "recipeServingsLabel": "Porzioni",
+  "unitServingShort": "porz.",
+  "recipeIngredientsTitle": "Ingredienti",
+  "recipeNoIngredientsMessage": "Nessun ingrediente disponibile per questa ricetta.",
+  "recipeInstructionsTitle": "Istruzioni",
+  "commonAddToMeal": "Aggiungi al pasto",
+  "recipeAddedToDiary": "Ricetta aggiunta al diario.",
+  "nutritionValuesTitle": "Valori nutrizionali",
+  "unitGram": "g",
+  "unitMilliliter": "ml",
+  "unitOunce": "oz",
+  "unitPound": "lb",
+  "unitPiece": "pz",
+  "unitCup": "cup",
+  "unitTablespoon": "cucchiaio",
+  "unitTeaspoon": "cucchiaino",
+  "unitServing": "Porzione",
+  "nutritionFiberLabel": "Fibre",
+  "nutritionSugarLabel": "Zuccheri",
+  "nutritionSodiumLabel": "Sodio",
+  "confirmFoodNutritionUpdateError": "Impossibile aggiornare i valori nutrizionali. Verranno usati quelli disponibili.",
+  "confirmFoodAddError": "Non è stato possibile aggiungere l'alimento al pasto. Riprova più tardi.",
+  "confirmFoodUnitLabel": "Unità",
+  "confirmFoodNutritionTitle": "Valori nutrizionali ({portion})",
+  "@confirmFoodNutritionTitle": {
+    "placeholders": {
+      "portion": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmFoodTitle": "Conferma alimento",
+  "scannerAlignBarcodeMessage": "Allinea il codice a barre all'interno della cornice",
+  "scannerProductNotFoundMessage": "Prodotto non trovato. Prova con un altro codice.",
+  "scannerCompletedMessage": "Scansione completata. Puoi inquadrare un nuovo codice a barre.",
+  "scannerErrorMessage": "Si è verificato un errore durante il recupero del prodotto.",
+  "scannerPermissionMessage": "Autorizza l'uso della fotocamera dalle impostazioni per continuare.",
+  "confirmFoodNutrientsCalories": "Calorie",
+  "confirmFoodNutrientsProtein": "Proteine",
+  "confirmFoodNutrientsFat": "Grassi",
+  "confirmFoodNutrientsCarbs": "Carboidrati",
+  "confirmFoodNutrientsFiber": "Fibre",
+  "confirmFoodNutrientsSugar": "Zuccheri",
+  "confirmFoodNutrientsSodium": "Sodio"
+}

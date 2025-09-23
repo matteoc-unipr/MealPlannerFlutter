@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:core_kit/core_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:nutrition_kit/nutrition_kit.dart';
 
@@ -53,7 +54,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
     super.initState();
     _controller = MobileScannerController();
     _controller.onPermissionSet = _handlePermission;
-    _statusMessage = "Allinea il codice a barre all'interno della cornice";
+    _statusMessage = null;
   }
 
   @override
@@ -76,7 +77,8 @@ class _ScannerScreenState extends State<ScannerScreen> {
       if (!granted) {
         _statusMessage = null;
       } else {
-        _statusMessage ??= "Allinea il codice a barre all'interno della cornice";
+        _statusMessage ??=
+            AppLocalizations.of(context)?.scannerAlignBarcodeMessage;
       }
     });
   }
@@ -110,7 +112,8 @@ class _ScannerScreenState extends State<ScannerScreen> {
       if (item == null) {
         setState(() {
           _isProcessing = false;
-          _statusMessage = 'Prodotto non trovato. Prova con un altro codice.';
+          _statusMessage =
+              AppLocalizations.of(context)?.scannerProductNotFoundMessage;
         });
         await _resumeScanner();
         return;
@@ -134,7 +137,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
       setState(() {
         _isProcessing = false;
         _statusMessage =
-            'Scansione completata. Puoi inquadrare un nuovo codice a barre.';
+            AppLocalizations.of(context)?.scannerCompletedMessage;
       });
     } catch (_) {
       if (!mounted) {
@@ -143,7 +146,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
       setState(() {
         _isProcessing = false;
         _statusMessage =
-            'Si è verificato un errore durante il recupero del prodotto.';
+            AppLocalizations.of(context)?.scannerErrorMessage;
       });
     } finally {
       await _resumeScanner();
@@ -204,6 +207,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final statusMessage = _hasPermission
+        ? _statusMessage ?? l10n.scannerAlignBarcodeMessage
+        : l10n.scannerPermissionMessage;
     return Scaffold(
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
@@ -234,13 +241,16 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (_statusMessage != null)
-                      Text(
-                        _statusMessage!,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
+                    if (statusMessage.isNotEmpty)
+                      Semantics(
+                        liveRegion: true,
+                        child: Text(
+                          statusMessage,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     if (_isProcessing)
                       const Padding(
@@ -259,10 +269,13 @@ class _ScannerScreenState extends State<ScannerScreen> {
                   color: Colors.black.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text(
-                  'Autorizza l\'uso della fotocamera dalle impostazioni per continuare.',
-                  style: TextStyle(color: Colors.white),
-                  textAlign: TextAlign.center,
+                child: Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    statusMessage,
+                    style: const TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ),

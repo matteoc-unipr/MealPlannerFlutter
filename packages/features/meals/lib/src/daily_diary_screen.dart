@@ -1,5 +1,6 @@
 import 'package:core_kit/core_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'meals_repository.dart';
 
@@ -33,9 +34,10 @@ class _DailyDiaryScreenState extends State<DailyDiaryScreen> {
   @override
   Widget build(BuildContext context) {
     final formattedDate = _formatDate(widget.date);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Diario • $formattedDate'),
+        title: Text(l10n.dailyDiaryTitle(formattedDate)),
       ),
       body: StreamBuilder<DailyDiary>(
         stream: _diaryStream,
@@ -50,21 +52,27 @@ class _DailyDiaryScreenState extends State<DailyDiaryScreen> {
           return ListView(
             padding: const EdgeInsets.all(24),
             children: [
-              Text(
-                'Riepilogo macro',
-                style: theme.textTheme.titleLarge,
+              Semantics(
+                header: true,
+                child: Text(
+                  l10n.dailyDiaryMacroSummaryTitle,
+                  style: theme.textTheme.titleLarge,
+                ),
               ),
               const SizedBox(height: 16),
               _MacroSummary(summary: diary.macroSummary),
               const SizedBox(height: 32),
-              Text(
-                'Pasti registrati',
-                style: theme.textTheme.titleLarge,
+              Semantics(
+                header: true,
+                child: Text(
+                  l10n.dailyDiaryMealsSectionTitle,
+                  style: theme.textTheme.titleLarge,
+                ),
               ),
               const SizedBox(height: 12),
               if (diary.meals.isEmpty)
                 Text(
-                  'Nessun pasto registrato per questo giorno.',
+                  l10n.dailyDiaryNoMealsMessage,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -93,27 +101,28 @@ class _MacroSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final macros = <_MacroData>[
       _MacroData(
-        label: 'Calorie',
+        label: l10n.macroCaloriesLabel,
         value: summary.consumed.calories,
         goal: summary.goal.calories,
         unit: 'kcal',
       ),
       _MacroData(
-        label: 'Proteine',
+        label: l10n.macroProteinLabel,
         value: summary.consumed.protein,
         goal: summary.goal.protein,
         unit: 'g',
       ),
       _MacroData(
-        label: 'Carboidrati',
+        label: l10n.macroCarbsLabel,
         value: summary.consumed.carbohydrates,
         goal: summary.goal.carbohydrates,
         unit: 'g',
       ),
       _MacroData(
-        label: 'Grassi',
+        label: l10n.macroFatLabel,
         value: summary.consumed.fat,
         goal: summary.goal.fat,
         unit: 'g',
@@ -149,47 +158,54 @@ class _MacroCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            NutrientRing(
-              value: macro.value,
-              goal: macro.goal,
-              size: 120,
-              strokeWidth: 10,
-              center: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${macro.percent}%',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+    final l10n = AppLocalizations.of(context)!;
+    final goalText = l10n.dailyDiaryMacroGoal(macro.formattedGoal);
+    return Semantics(
+      label: macro.label,
+      value: macro.formattedValue,
+      hint: goalText,
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              NutrientRing(
+                value: macro.value,
+                goal: macro.goal,
+                size: 120,
+                strokeWidth: 10,
+                center: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '${macro.percent}%',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    macro.label,
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ],
+                    Text(
+                      macro.label,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              macro.formattedValue,
-              style: theme.textTheme.titleMedium,
-            ),
-            Text(
-              'Obiettivo ${macro.formattedGoal}',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+              const SizedBox(height: 16),
+              Text(
+                macro.formattedValue,
+                style: theme.textTheme.titleMedium,
               ),
-            ),
-          ],
+              Text(
+                goalText,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -240,19 +256,21 @@ class _MealTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final time = TimeOfDay.fromDateTime(meal.consumedAt);
     final timeLabel = time.format(context);
     final ingredients = meal.ingredients;
     final subtitle = ingredients.isEmpty
-        ? 'Nessun alimento registrato'
+        ? l10n.mealTileNoIngredients
         : ingredients.map((ingredient) => ingredient.item.name).join(', ');
+    final mealTypeLabel = _mealTypeLabel(meal.mealType, l10n);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         title: Text(
-          '${_mealTypeLabel(meal.mealType)} • $timeLabel',
+          l10n.mealTypeWithTime(mealTypeLabel, timeLabel),
           style: theme.textTheme.titleMedium,
         ),
         subtitle: Text(subtitle),
@@ -260,16 +278,16 @@ class _MealTile extends StatelessWidget {
     );
   }
 
-  String _mealTypeLabel(MealType type) {
+  String _mealTypeLabel(MealType type, AppLocalizations l10n) {
     switch (type) {
       case MealType.breakfast:
-        return 'Colazione';
+        return l10n.mealTypeBreakfast;
       case MealType.lunch:
-        return 'Pranzo';
+        return l10n.mealTypeLunch;
       case MealType.dinner:
-        return 'Cena';
+        return l10n.mealTypeDinner;
       case MealType.snack:
-        return 'Spuntino';
+        return l10n.mealTypeSnack;
     }
   }
 }

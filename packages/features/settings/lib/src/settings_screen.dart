@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:core_kit/core_kit.dart';
 import 'package:data_kit/data_kit.dart' as data_kit;
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
@@ -82,10 +83,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(l10n.settingsTitle),
       ),
       body: Form(
         key: _formKey,
@@ -94,28 +96,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Target calorico',
-                style: theme.textTheme.titleMedium,
+              Semantics(
+                header: true,
+                child: Text(
+                  l10n.settingsCalorieTargetSectionTitle,
+                  style: theme.textTheme.titleMedium,
+                ),
               ),
               const SizedBox(height: 8),
               TextFormField(
                 key: const Key('settings_kcal_field'),
                 controller: _calorieController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Calorie giornaliere (kcal)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.settingsDailyCaloriesLabel,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
-                'Obiettivi macro',
-                style: theme.textTheme.titleMedium,
+              Semantics(
+                header: true,
+                child: Text(
+                  l10n.settingsMacroGoalsSectionTitle,
+                  style: theme.textTheme.titleMedium,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Imposta gli obiettivi giornalieri per i principali macronutrienti.',
+                l10n.settingsMacroGoalsDescription,
                 style: theme.textTheme.bodySmall,
               ),
               const SizedBox(height: 12),
@@ -123,9 +131,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 key: const Key('settings_protein_field'),
                 controller: _proteinController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Proteine (g)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.settingsProteinLabel,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 12),
@@ -133,9 +141,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 key: const Key('settings_carbs_field'),
                 controller: _carbohydrateController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Carboidrati (g)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.settingsCarbsLabel,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 12),
@@ -143,39 +151,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 key: const Key('settings_fat_field'),
                 controller: _fatController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Grassi (g)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.settingsFatLabel,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
-                'Allergie',
-                style: theme.textTheme.titleMedium,
+              Semantics(
+                header: true,
+                child: Text(
+                  l10n.settingsAllergiesSectionTitle,
+                  style: theme.textTheme.titleMedium,
+                ),
               ),
               const SizedBox(height: 8),
               TextFormField(
                 key: const Key('settings_allergies_field'),
                 controller: _allergiesController,
                 maxLines: 3,
-                decoration: const InputDecoration(
-                  hintText: 'Inserisci le allergie separate da virgola',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: l10n.settingsAllergiesHint,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
               DropdownButtonFormField<Weekday>(
                 key: const Key('settings_shopping_day_field'),
                 value: _selectedDay,
-                decoration: const InputDecoration(
-                  labelText: 'Giorno della spesa',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.settingsShoppingDayLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items: Weekday.values
                     .map(
                       (weekday) => DropdownMenuItem<Weekday>(
                         value: weekday,
-                        child: Text(_weekdayLabel(weekday)),
+                        child: Text(_weekdayLabel(weekday, l10n)),
                       ),
                     )
                     .toList(),
@@ -192,10 +203,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SwitchListTile(
                 key: const Key('settings_health_toggle'),
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Sincronizza con Health'),
-                subtitle: const Text(
-                  'Abilita l\'integrazione con i servizi di salute del dispositivo.',
-                ),
+                title: Text(l10n.settingsHealthSyncTitle),
+                subtitle: Text(l10n.settingsHealthSyncSubtitle),
                 value: _healthIntegrationEnabled,
                 onChanged: (value) {
                   setState(() {
@@ -220,7 +229,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                         )
-                      : const Text('Export'),
+                      : Text(l10n.settingsExportButton),
                 ),
               ),
               const SizedBox(height: 12),
@@ -240,7 +249,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                         )
-                      : const Text('Delete Data'),
+                      : Text(l10n.settingsDeleteButton),
                 ),
               ),
             ],
@@ -257,12 +266,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return value.toString();
   }
 
-  String _weekdayLabel(Weekday day) {
-    final name = day.name;
-    if (name.isEmpty) {
-      return '';
+  String _weekdayLabel(Weekday day, AppLocalizations l10n) {
+    switch (day) {
+      case Weekday.monday:
+        return l10n.weekdayMonday;
+      case Weekday.tuesday:
+        return l10n.weekdayTuesday;
+      case Weekday.wednesday:
+        return l10n.weekdayWednesday;
+      case Weekday.thursday:
+        return l10n.weekdayThursday;
+      case Weekday.friday:
+        return l10n.weekdayFriday;
+      case Weekday.saturday:
+        return l10n.weekdaySaturday;
+      case Weekday.sunday:
+        return l10n.weekdaySunday;
     }
-    return name[0].toUpperCase() + name.substring(1);
   }
 
   Future<void> _onExportPressed() async {
@@ -273,6 +293,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _isExporting = true;
     });
 
+    final l10n = AppLocalizations.of(context)!;
+
     try {
       final snapshot = await widget.exportJson();
       final file = File(widget.exportPath);
@@ -282,7 +304,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return;
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Esportazione completata.')),
+        SnackBar(content: Text(l10n.settingsExportSuccess)),
       );
     } catch (error) {
       if (!mounted) {
@@ -290,7 +312,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Errore durante l'esportazione: $error"),
+          content: Text(l10n.settingsExportError('$error')),
         ),
       );
     } finally {
@@ -308,24 +330,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return;
     }
 
+    final l10n = AppLocalizations.of(context)!;
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Delete Data'),
-          content: const Text(
-            'Sei sicuro di voler eliminare tutti i dati salvati? Questa azione non può essere annullata.',
-          ),
+          title: Text(l10n.settingsDeleteDialogTitle),
+          content: Text(l10n.settingsDeleteDialogMessage),
           actions: [
             TextButton(
               key: const Key('settings_cancel_delete_button'),
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Annulla'),
+              child: Text(l10n.commonCancel),
             ),
             FilledButton(
               key: const Key('settings_confirm_delete_button'),
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Conferma'),
+              child: Text(l10n.commonConfirm),
             ),
           ],
         );
@@ -346,7 +368,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return;
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Tutti i dati sono stati eliminati.')),
+        SnackBar(content: Text(l10n.settingsDeleteSuccess)),
       );
     } catch (error) {
       if (!mounted) {
@@ -354,7 +376,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Errore durante l'eliminazione: $error"),
+          content: Text(l10n.settingsDeleteError('$error')),
         ),
       );
     } finally {

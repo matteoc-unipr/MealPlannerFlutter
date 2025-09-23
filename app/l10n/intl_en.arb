@@ -1,0 +1,159 @@
+{
+  "@@locale": "en",
+  "appTitle": "Meal Planner",
+  "counterScreenTitle": "Meal Planner",
+  "counterInstructions": "You have pushed the button this many times:",
+  "counterTooltip": "Increment",
+  "counterValueSemantic": "Current count: {value}",
+  "@counterValueSemantic": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "settingsCalorieTargetSectionTitle": "Calorie target",
+  "settingsDailyCaloriesLabel": "Daily calories (kcal)",
+  "settingsMacroGoalsSectionTitle": "Macro goals",
+  "settingsMacroGoalsDescription": "Set the daily targets for the main macronutrients.",
+  "settingsProteinLabel": "Protein (g)",
+  "settingsCarbsLabel": "Carbohydrates (g)",
+  "settingsFatLabel": "Fat (g)",
+  "settingsAllergiesSectionTitle": "Allergies",
+  "settingsAllergiesHint": "Enter allergies separated by commas",
+  "settingsShoppingDayLabel": "Shopping day",
+  "settingsHealthSyncTitle": "Sync with Health",
+  "settingsHealthSyncSubtitle": "Enable the integration with the device health services.",
+  "settingsExportButton": "Export",
+  "settingsDeleteButton": "Delete data",
+  "settingsExportSuccess": "Export completed.",
+  "settingsExportError": "Error while exporting: {error}",
+  "@settingsExportError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDeleteDialogTitle": "Delete data",
+  "settingsDeleteDialogMessage": "Are you sure you want to delete all saved data? This action cannot be undone.",
+  "commonCancel": "Cancel",
+  "commonConfirm": "Confirm",
+  "settingsDeleteSuccess": "All data has been deleted.",
+  "settingsDeleteError": "Error while deleting: {error}",
+  "@settingsDeleteError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "weekdayMonday": "Monday",
+  "weekdayTuesday": "Tuesday",
+  "weekdayWednesday": "Wednesday",
+  "weekdayThursday": "Thursday",
+  "weekdayFriday": "Friday",
+  "weekdaySaturday": "Saturday",
+  "weekdaySunday": "Sunday",
+  "dailyDiaryTitle": "Diary • {date}",
+  "@dailyDiaryTitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dailyDiaryMacroSummaryTitle": "Macro summary",
+  "dailyDiaryMealsSectionTitle": "Logged meals",
+  "dailyDiaryNoMealsMessage": "No meals logged for this day.",
+  "macroCaloriesLabel": "Calories",
+  "macroProteinLabel": "Protein",
+  "macroCarbsLabel": "Carbohydrates",
+  "macroFatLabel": "Fat",
+  "dailyDiaryMacroGoal": "Goal {goal}",
+  "@dailyDiaryMacroGoal": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "mealTileNoIngredients": "No ingredients recorded",
+  "mealTypeBreakfast": "Breakfast",
+  "mealTypeLunch": "Lunch",
+  "mealTypeDinner": "Dinner",
+  "mealTypeSnack": "Snack",
+  "mealTypeWithTime": "{mealType} • {time}",
+  "@mealTypeWithTime": {
+    "placeholders": {
+      "mealType": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "addMealScanLabel": "Scan",
+  "addMealScanDescription": "Point the camera at a product barcode.",
+  "addMealSearchLabel": "Search",
+  "addMealSearchDescription": "Find a food item in the catalog.",
+  "addMealRecipesLabel": "Recipes",
+  "addMealRecipesDescription": "Add one of your saved recipes.",
+  "addMealQuickLabel": "Quick add",
+  "addMealQuickDescription": "Quickly log calories or notes.",
+  "quantityUpdatedMessage": "Quantity updated to {value}",
+  "@quantityUpdatedMessage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "commonUndo": "Undo",
+  "recipeServingsLabel": "Servings",
+  "unitServingShort": "serv.",
+  "recipeIngredientsTitle": "Ingredients",
+  "recipeNoIngredientsMessage": "No ingredients available for this recipe.",
+  "recipeInstructionsTitle": "Instructions",
+  "commonAddToMeal": "Add to meal",
+  "recipeAddedToDiary": "Recipe added to diary.",
+  "nutritionValuesTitle": "Nutrition facts",
+  "unitGram": "g",
+  "unitMilliliter": "ml",
+  "unitOunce": "oz",
+  "unitPound": "lb",
+  "unitPiece": "pc",
+  "unitCup": "cup",
+  "unitTablespoon": "tbsp",
+  "unitTeaspoon": "tsp",
+  "unitServing": "Serving",
+  "nutritionFiberLabel": "Fiber",
+  "nutritionSugarLabel": "Sugar",
+  "nutritionSodiumLabel": "Sodium",
+  "confirmFoodNutritionUpdateError": "Unable to refresh nutrition values. Existing values will be used.",
+  "confirmFoodAddError": "The food could not be added to the meal. Please try again later.",
+  "confirmFoodUnitLabel": "Unit",
+  "confirmFoodNutritionTitle": "Nutrition facts ({portion})",
+  "@confirmFoodNutritionTitle": {
+    "placeholders": {
+      "portion": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmFoodTitle": "Confirm food",
+  "scannerAlignBarcodeMessage": "Align the barcode within the frame",
+  "scannerProductNotFoundMessage": "Product not found. Try a different code.",
+  "scannerCompletedMessage": "Scan completed. You can scan another barcode.",
+  "scannerErrorMessage": "An error occurred while fetching the product.",
+  "scannerPermissionMessage": "Allow camera usage from settings to continue.",
+  "confirmFoodNutrientsCalories": "Calories",
+  "confirmFoodNutrientsProtein": "Protein",
+  "confirmFoodNutrientsFat": "Fat",
+  "confirmFoodNutrientsCarbs": "Carbohydrates",
+  "confirmFoodNutrientsFiber": "Fiber",
+  "confirmFoodNutrientsSugar": "Sugar",
+  "confirmFoodNutrientsSodium": "Sodium"
+}
