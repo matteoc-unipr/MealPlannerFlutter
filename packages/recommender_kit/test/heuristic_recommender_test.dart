@@ -41,7 +41,8 @@ void main() {
 
       final chicken = FoodItem.create(
         name: 'Chicken Breast',
-        nutrients: const Nutrients(calories: 165, protein: 31, fat: 4, carbohydrates: 0),
+        nutrients: const Nutrients(
+            calories: 165, protein: 31, fat: 4, carbohydrates: 0),
         servingSize: 100,
         servingUnit: UnitType.gram,
         tags: const ['meat'],
@@ -49,7 +50,8 @@ void main() {
 
       final peanuts = FoodItem.create(
         name: 'Peanuts',
-        nutrients: const Nutrients(calories: 300, protein: 13, fat: 26, carbohydrates: 8),
+        nutrients: const Nutrients(
+            calories: 300, protein: 13, fat: 26, carbohydrates: 8),
         servingSize: 50,
         servingUnit: UnitType.gram,
         allergens: const ['peanuts'],
@@ -57,7 +59,8 @@ void main() {
 
       final mushroom = FoodItem.create(
         name: 'Mushroom',
-        nutrients: const Nutrients(calories: 20, protein: 3, fat: 0, carbohydrates: 2),
+        nutrients:
+            const Nutrients(calories: 20, protein: 3, fat: 0, carbohydrates: 2),
         servingSize: 50,
         servingUnit: UnitType.gram,
       );
@@ -184,7 +187,8 @@ void main() {
             Ingredient.create(
               item: FoodItem.create(
                 name: title,
-                nutrients: Nutrients(calories: calories, protein: 10, fat: 5, carbohydrates: 20),
+                nutrients: Nutrients(
+                    calories: calories, protein: 10, fat: 5, carbohydrates: 20),
                 servingSize: 1,
                 servingUnit: UnitType.serving,
                 tags: const ['lunch'],
@@ -255,13 +259,11 @@ void main() {
 
       await recordFeedback(event);
 
-      final row = await db
-          .customSelect(
-            'SELECT * FROM event_logs WHERE id = ? LIMIT 1',
-            variables: [Variable<String>(event.id)],
-            readsFrom: {db.eventLogs},
-          )
-          .getSingleOrNull();
+      final row = await db.customSelect(
+        'SELECT * FROM event_logs WHERE id = ? LIMIT 1',
+        variables: [Variable<String>(event.id)],
+        readsFrom: {db.eventLogs},
+      ).getSingleOrNull();
 
       expect(row, isNotNull);
       final stored = db.mapEventLog(Map<String, dynamic>.from(row!.data));

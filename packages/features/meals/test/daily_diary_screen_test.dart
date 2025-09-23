@@ -2,6 +2,7 @@ import 'package:core_kit/core_kit.dart';
 import 'package:data_kit/data_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:meals_feature/meals_feature.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -19,7 +20,8 @@ void main() {
     );
   });
 
-  testWidgets('shows macro summary and meals for the selected day', (tester) async {
+  testWidgets('shows macro summary and meals for the selected day',
+      (tester) async {
     final dao = _MockMealEntryDao();
     final date = DateTime(2024, 5, 10);
 
@@ -64,6 +66,9 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        locale: const Locale('it'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: DailyDiaryScreen(repository: repository, date: date),
       ),
     );
